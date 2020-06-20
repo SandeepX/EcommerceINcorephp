@@ -1,0 +1,89 @@
+<?php require $_SERVER['DOCUMENT_ROOT'].'config/init.php'; ?>
+<?php 
+  require 'inc/checklogin.php';
+  $page_title = "Product List";
+  require CLASS_PATH.'product.php';
+
+  $product = new Product();
+
+require 'inc/header.php'; ?>
+
+    <div class="container body">
+      <div class="main_container">
+        <?php require 'inc/menu.php' ?>
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="">
+            <?php flash(); ?>
+            
+            <div class="page-title">
+              <div class="title_left">
+                <h3>Product List</h3>
+              </div>
+
+              <div class="title_right">
+                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                 
+                </div>
+              </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Product List</h2>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                      <table class="table table-bordered  jambo_table">
+                          <thead>
+                            <th>S.N</th>
+                            <th>Title</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Discount</th>
+                            <th>Status</th>
+                            
+                          </thead>
+                          <tbody>
+                            <?php                               
+                                $all_products = $product->getAllProducts();
+                                // debugger($all_products);
+                                if($all_products){
+                                  foreach($all_products as $key=>$product_info){
+                                      ?>
+                                          <tr>
+                                              <td><?php echo ($key+1) ?></td>
+                                              <td><?php echo $product_info->title; ?></td>
+                                              <td><?php echo $product_info->cat_title; ?></td>
+                                              <td><?php echo "NPR. ".number_format($product_info->price); ?></td>
+                                              <td><?php echo $product_info->discount.'%'; ?></td>
+                                              <td><?php echo $product_info->status; ?></td>
+                                            
+                                              
+                                            
+                                          </tr>
+                                      <?php
+                                  }
+                                }
+                            ?>
+
+                          </tbody>
+                      </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /page content -->
+
+       <?php include 'inc/copy.php'; ?>
+      </div>
+    </div>
+<?php require 'inc/footer.php';?>

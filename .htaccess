@@ -1,0 +1,17 @@
+Options -Indexes
+
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule (.*) $1.php [L]
+
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule (.*) $1.html [L]
+
+# RewriteCond %{REQUEST_FILENAME}.php !-d
+# RewriteCond %{REQUEST_FILENAME}.php !-f
+# RewriteRule ^ index.php [L]
+
+
+
+ErrorDocument 403 'You do not have permission to access this directory'
